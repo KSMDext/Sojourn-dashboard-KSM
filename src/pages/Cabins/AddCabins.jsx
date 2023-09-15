@@ -1,10 +1,56 @@
-import React from "react";
+import {React,useState} from "react";
 import { Link } from "react-router-dom";
 import { CiCircleAlert } from "react-icons/ci";
-import { RiArrowDropDownLine } from "react-icons/ri";
 import ImageUploader from "../../components/ImageUploader";
 
 const AddCabins = () => {
+
+  const [selectedAmenities, setSelectedAmenities] = useState([]);
+  const [formData, setFormData] = useState({
+    bedType: '', // Initialize bedType to an empty string
+    number: '',   // Initialize number to an empty string
+  });
+
+  const amenities = [
+    { name: 'Air conditioning', id: 'ac' },
+    { name: 'Minibar', id: 'minibar' },
+    { name: 'WorkSpace', id: 'workspace' },
+    { name: 'Internet', id: 'internet' },
+    { name: 'Shower', id: 'shower' },
+    { name: 'Towel', id: 'towel' },
+    { name: 'Safe', id: 'safe' },
+  ];
+
+  const morePriceOptions = ['option 1', 'option 2']
+
+  const locationObject = ['Location 1', 'Location2']
+
+
+const handleAmenityChange = (e, amenityId) => {
+  const isChecked = e.target.checked;
+  if (isChecked) {
+    setSelectedAmenities((prevSelected) => [...prevSelected, amenityId]);
+  } else {
+    setSelectedAmenities((prevSelected) =>
+      prevSelected.filter((id) => id !== amenityId)
+    );
+  }
+};
+
+
+  const handleInputChange = (e) => {
+    const { name, value } = e.target;
+    setFormData({
+      ...formData,
+      [name]: value,
+    });
+  };
+  
+  const bed = [
+    { type: 'Queen', quantity: '' },
+    { type: 'Student', quantity: '' }
+  ];
+
   return (
     <div>
       <p className="mx-[35px] mt-[20px] text-2xl font-medium">Add Cabins</p>
@@ -24,7 +70,7 @@ const AddCabins = () => {
                   </div>
                   <input
                     className="w-[350px] h-[32px] p-2 border-1 border-slate-200 rounded "
-                    type="number"
+                    type="text"
                   />
                 </div>
                 <div className="grid grid-cols-2  mt-2">
@@ -89,120 +135,75 @@ const AddCabins = () => {
 
       {/* BED */}
       <div className="grid grid-cols-2 gap-[200px] p-8 mt-[20px]  mx-[35px] bg-white rounded">
-        <div>
-          <p className="w-[141px] h-[14px] text-xl font-bold text-sky-700">
-            Beds
-          </p>
-          <div className="grid grid-cols-2 gap-[100px] w-[700px]">
-            <form>
-              <div className="grid grid-rows-2 pt-[20px]">
-                <div className="flex flex-col items-left text-[14px]">
-                  <div className="flex items-center text-[14px]">
-                    <span>Bed type</span>
-                  </div>
-                  <select className="w-[334px] h-[32px]  border-1 border-slate-200 rounded mt-2 text-[14px] mb-1">
-                    <option value="">Choose bed type</option>
-                  </select>
-                </div>
-                <div className="grid grid-cols-2">
-                  <div className="flex flex-col items-left">
-                    <div className="flex items-center text-[14px]"></div>
-                    <select className="w-[334px] h-[32px]  border-1  border-slate-200 rounded mt-2 text-[14px]">
-                      <option value="">Choose bed type</option>
-                    </select>
-                  </div>
-                </div>
-              </div>
-            </form>
-            <form>
-              <div className="flex flex-col items-left text-[14px] mb-1">
-                <span className="mt-[20px] mb-[5px]">Number</span>
-
-                <input
-                  type="number"
-                  className="w-[127px] h-[30px] p-2 border-1  border-slate-200 rounded text-[14px] mb-1"
-                />
-                <input
-                  type="number"
-                  className="w-[127px] h-[30px] p-2 border-1  border-slate-200 rounded mt-2"
-                />
-              </div>
-            </form>
+      <div className="grid grid-cols-2 gap-[100px] w-[700px]">
+        <div className="grid grid-rows-2 pt-[20px]">
+          <div className="flex flex-col items-left text-[14px]">
+            <label htmlFor='' className='flex items-center text-[14px]'>
+              Bed type
+            </label>
+            <select
+              className="w-[334px] h-[32px] border-1 border-slate-200 rounded mt-2 text-[14px] mb-1"
+              name="bedType"
+              value={formData.bedType}
+              onChange={handleInputChange}
+            >
+              <option value="">Choose a bed type</option>
+              {bed.map((bedd) => (
+                <option key={bedd.type} value={bedd.type}>
+                  {bedd.type}
+                </option>
+              ))}
+            </select>
+          </div>
+          <div className="grid grid-cols-2">
+            <div className="flex flex-col items-left">
+              <div className="flex items-center text-[14px]"></div>
+            </div>
           </div>
         </div>
+        <div className="flex flex-col items-left text-[14px] mb-1">
+          <span className="mt-[20px] mb-[5px]">Number</span>
+          <input
+            type="number"
+            name="number"
+            value={formData.number}
+            className="w-[127px] h-[30px] p-2 border-1 border-slate-200 rounded text-[14px] mb-1"
+            onChange={handleInputChange}
+          />
+        </div>
+      </div>
+
 
         {/* Amenities Section */}
         <div className="border-l-2 ">
-          <div className="ml-6 ">
-            <form>
-              {/* <div className="grid grid-rows-2"> */}
-              <div className="grid grid-cols-2 ">
-                <div>
-                  <div className="flex flex-col items-left ">
-                    <div className="flex items-center text-[14px]">
-                      <span className="text-xl font-bold text-sky-700">
-                        Amenities
-                      </span>
+              <div className="ml-6 ">
+                <form>
+                  <div className="grid grid-cols-2">
+                    <div>
+                      <div className="flex flex-col items-left">
+                        <div className="flex items-center text-[14px]">
+                          <span className="text-xl font-bold text-sky-700">Amenities</span>
+                        </div>
+                      </div>
+
+                      {amenities.map((amenity) => (
+                        <div className="mb-2 flex items-center text-[14px]" key={amenity.id}>
+                          <input
+                            className="border-1 border-slate-200 w-[23px] h-[19px]"
+                            type="checkbox"
+                            id={amenity.id}
+                            onChange={(e) => handleAmenityChange(e, amenity.id)} 
+                          />
+                          <label htmlFor={amenity.id} className="pl-[5px]">
+                            {amenity.name}
+                          </label>
+                        </div>
+                      ))}
                     </div>
                   </div>
-
-                  <div className="mb-2 flex items-center text-[14px]">
-                    <input
-                      className=" border-1 border-slate-200 w-[23px] h-[19px]"
-                      type="checkbox"
-                    />
-                    <span className="pl-[5px] ">Air conditioning</span>
-                  </div>
-                  <div className="mb-2 flex items-center text-[14px]">
-                    <input
-                      className=" border-1 border-slate-200	w-[23px] h-[19px]"
-                      type="checkbox"
-                    />
-                    <span className="pl-[5px]">Minibar</span>
-                  </div>
-                  <div className="mb-2 flex items-center text-[14px]">
-                    <input
-                      className=" border-1 border-slate-200	w-[23px] h-[19px] "
-                      type="checkbox"
-                    />
-                    <span className="pl-[5px]">WorkSpace</span>
-                  </div>
-                  <div className="mb-2 flex items-center text-[14px]">
-                    <input
-                      className=" border-1 border-slate-200	w-[23px] h-[19px]"
-                      type="checkbox"
-                    />
-                    <span className="pl-[5px]">Internet</span>
-                  </div>
-                </div>
-                <div className="mt-[25px]">
-                  <div className="mb-2 flex items-center text-[14px]">
-                    <input
-                      className=" border-1 border-slate-200	w-[23px] h-[19px]"
-                      type="checkbox"
-                    />
-                    <span className="pl-[5px]">Shower</span>
-                  </div>
-                  <div className="mb-2 flex items-center text-[14px]">
-                    <input
-                      className=" border-1 border-slate-200	w-[23px] h-[19px]"
-                      type="checkbox"
-                    />
-                    <span className="pl-[5px]">Towel</span>
-                  </div>
-                  <div className="mb-2 flex items-center text-[14px]">
-                    <input
-                      className=" border-1 border-slate-200	w-[23px] h-[19px]"
-                      type="checkbox"
-                    />
-                    <span className="pl-[5px]">Safe</span>
-                  </div>
-                </div>
+                </form>
               </div>
-              {/* </div> */}
-            </form>
-          </div>
-        </div>
+            </div>
       </div>
 
       {/* Photo Section */}
@@ -230,7 +231,8 @@ const AddCabins = () => {
               <span>Location*</span>
             </div>
             <select className="w-[444px] h-[39px]  border-1 border-slate-200 rounded mt-2">
-              <option value=""></option>
+              <option value="">Choose a Location</option>
+              {locationObject.map(location=>(<option value={location}>{location}</option>))}
             </select>
           </div>
         </div>
@@ -249,11 +251,14 @@ const AddCabins = () => {
             </select>
           </div>
           <div className="flex items-center">
-            <p className="text-sky-500 text-xs inline-flex">
-              More pricing options
-              <RiArrowDropDownLine className="ml-1 h-[20px] w-[30px] self-center" />
-            </p>
-          </div>
+          
+                <select className='text-sky-500 text-xs inline-flex'>
+                  <option value=''>More pricing options</option>
+                  {morePriceOptions.map(priceName =>(
+                  <option key={priceName} value={priceName}>{priceName}</option>
+                  ))}
+                </select>
+            </div>
         </div>
 
         <div className="mt-[30px]">
