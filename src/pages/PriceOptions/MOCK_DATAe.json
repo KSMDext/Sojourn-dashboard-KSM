@@ -1,0 +1,23 @@
+[
+    {
+        "Service": "Massage",
+        "Price": "$20",
+        "Description": "Soothing massage from our experts",
+        "AvailableTimes": "Weekends"
+     
+      },
+      {
+        "Service": "Wifi",
+        "Price": "Free",
+        "Description": "Free Wifi, sufficient enough for your internet needs",
+        "AvailableTimes": "Alwyas" 
+      
+      },
+      {
+        "Service": "Splash Pool",
+        "Price": "$20",
+        "Description": "A clean smimming pool",
+        "AvailableTimes": "Always"
+      
+      }
+]

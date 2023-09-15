@@ -1,0 +1,3 @@
+[submodule "sojourn-cabins-dashboard"]
+    path = sojourn-cabins-dashboard
+    url = https://github.com/KSMDext/sojourn-cabins-dashboard.git

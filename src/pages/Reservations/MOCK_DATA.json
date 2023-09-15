@@ -1,0 +1,32 @@
+[
+  {
+    "check_in_date": "2023-8-17",
+    "check_out_date": "2023-8-18",
+    "is_package_reservation": true,
+    "package": "153c0aea-42d3-404a-8aa6-461da20d88cb",
+    "cabins": [
+        "561a8e7a-f1a7-412f-91b8-d8a501a2a4ca"
+    ],
+    "reservation_extra_charges": [
+        {
+            "extra_charge": "84ab6121-8e1a-4b25-8a2f-485308109cd0",
+            "quantity": 2
+        }
+    ],
+    "number_of_guests": 2,
+    "guest": {
+        "email": "darkbotbbl@gmail.com",
+        "first_name": "{{$randomFirstName}}",
+        "last_name": "{{$randomLastName}}",
+        "phone_number": "+233551528489",
+        "country": "{{$randomCountryCode}}",
+        "address": "{{$randomStreetAddress}}"
+    },
+    "payments": [
+        {
+            "token": "003234adfa889adfadf",
+            "amount": 176.52
+        }
+    ]
+}
+]

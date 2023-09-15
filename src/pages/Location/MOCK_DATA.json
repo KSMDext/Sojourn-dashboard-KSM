@@ -1,0 +1,58 @@
+[{
+    "BookedCabins": "5",
+    "TotalCabins": "20",
+   "AvailableCabins": "15",
+    "Description": "Best location to release stress",
+    "Location": "Tema community18",
+    "LocationImage": "https://images.pexels.com/photos/106399/pexels-photo-106399.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2"
+  },
+  {
+    "BookedCabins": "35",
+    "TotalCabins": "70",
+    "AvailableCabins": "35",
+    "Description": "Best location to release stress",
+    "Location": "Delhi",
+    "LocationImage": "https://images.pexels.com/photos/106399/pexels-photo-106399.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2"
+  },
+  {
+    "BookedCabins": "35",
+    "TotalCabins": "50",
+    "AvailableCabins": "15",
+    "Description": "Best location to release stress",
+    "Location": "New York",
+    "LocationImage": "https://images.pexels.com/photos/106399/pexels-photo-106399.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2"
+  },
+  {
+    "BookedCabins": "25",
+    "TotalCabins": "40",
+    "AvailableCabins": "15",
+    "Description": "Best location to release stress",
+    "Location": "Germany",
+    "LocationImage": "https://images.pexels.com/photos/106399/pexels-photo-106399.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2"
+  },
+  {
+    "BookedCabins": "25",
+    "TotalCabins": "40",
+    "AvailableCabins": "15",
+    "Description": "Best location to release stress",
+    "Location": "Germany",
+    "LocationImage": "https://images.pexels.com/photos/106399/pexels-photo-106399.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2"
+  },
+  {
+    "BookedCabins": "10",
+    "TotalCabins": "30",
+    "AvailableCabins": "20",
+    "Description": "Makeup Lancome Rouge",
+    "Location": "Tema community18",
+    "LocationImage": "https://images.pexels.com/photos/106399/pexels-photo-106399.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2"
+  },
+  {
+    "BookedCabins": "45",
+    "TotalCabins": "55",
+    "AvailableCabins": "15",
+    "Description": "Best location to release stress",
+    "Location": "USA",
+    "LocationImage": "https://images.pexels.com/photos/106399/pexels-photo-106399.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2"
+  }
+  
+]

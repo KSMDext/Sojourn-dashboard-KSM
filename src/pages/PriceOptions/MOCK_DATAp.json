@@ -1,0 +1,42 @@
+[
+    {
+      "PackageName": "Package 1",
+      "Location": "All Locations",
+      "Cabin": "All Cabins",
+      "StartDate": "11/02/2022",
+      "ExpiryDate": "12/02/2023", 
+      "Price": "$10"
+    },
+    {
+      "PackageName": "Package 2",
+      "Location": "All Locations",
+      "Cabin": "All Cabins",
+      "StartDate": "11/02/2022",
+      "ExpiryDate": "12/02/2023", 
+      "Price": "$500"
+    },
+    {
+      "PackageName": "Package 3",
+      "Location": "All Locations",
+      "Cabin": "All Cabins",
+      "StartDate": "11/02/2022",
+      "ExpiryDate": "12/02/2023", 
+      "Price": "$230"
+    },
+    {
+      "PackageName": "Package 4",
+      "Location": "All Locations",
+      "Cabin": "All Cabins",
+      "StartDate": "11/02/2022",
+      "ExpiryDate": "12/02/2023", 
+      "Price": "$1000"
+    },
+    {
+      "PackageName": "Package 4",
+      "Location": "All Locations",
+      "Cabin": "All Cabins",
+      "StartDate": "11/02/2022",
+      "ExpiryDate": "12/02/2023", 
+      "Price": "$120"
+    }
+  ]
