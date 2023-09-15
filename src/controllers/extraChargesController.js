@@ -1,4 +1,4 @@
-import { extraChargesAPI } from "api/extraChargesAPI";
+import { extraChargesAPI } from "../api/extraChargesAPI";
 
 class ExtraChargesController {
   static async getAllExtraCharges() {

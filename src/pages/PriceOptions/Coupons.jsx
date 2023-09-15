@@ -3,19 +3,20 @@ import { useTable, useGlobalFilter, usePagination } from 'react-table';
 import { IoMdArrowBack } from 'react-icons/io';
 import {IoArrowForward} from 'react-icons/io5';
 import { Link } from 'react-router-dom'
-import axios from 'axios';
 import { COLUMNS } from './ColumnsCoupon';
 import './table.css';
 import { GlobalFilter } from '../../components/GlobalFilter';
-import { useStateContext } from '../../contexts/ContextProvider';
-
+import CouponsController from '../../controllers/couponsController';
+import { useDispatch, useSelector } from 'react-redux';
+import { PulseLoader } from 'react-spinners';
+import toast from "react-hot-toast";
+import { setAllCoupons } from '../../store/features/coupons.slice';
 
 const Coupons = () => {
-  const [MOCK_DATA, setMOCK_DATA] = useState([])
-  const columns = useMemo(() => COLUMNS, []);
-  const data = useMemo(() => MOCK_DATA, [MOCK_DATA]);
-  const {tokens} = useStateContext();
+  const [isLoading, setIsLoading] = useState(false);
 
+  const { allCoupons } = useSelector((state) => state.coupons);
+  const dispatch = useDispatch();
   const {
     getTableProps,
     getTableBodyProps,
@@ -31,8 +32,8 @@ const Coupons = () => {
     setGlobalFilter,
   } = useTable(
     {
-      columns,
-      data,
+      columns: COLUMNS,
+      data: allCoupons,
       initialState: { pageSize: 5 }, 
     },
     useGlobalFilter,
@@ -41,33 +42,46 @@ const Coupons = () => {
 
   const { globalFilter } = state;
   const { pageIndex } = state;
-  useEffect(() => {
-    const token = tokens.access
-    const config = {
-        headers: {
-            Authorization: `Bearer ${token}`
-        }
-    };
 
-    axios.get("http://ec2-54-91-145-179.compute-1.amazonaws.com/sojourn-cabins/api/v1/coupons/", config)
-        .then((response) => {
-            console.log(response.data);
-            setMOCK_DATA(response.data);
-        })
-        .catch((error) => {
-            console.log(error);
-        });
-}, [tokens]);
+  const getAllCoupons = async () => {
+    setIsLoading(true);
+    CouponsController.getAllCoupons()
+    .then((response) => {
+      dispatch(setAllCoupons(response?.data ?? []));
+      setIsLoading(false);
+    })
+    .catch((error) => {
+      console.log(error);
+      setIsLoading(false);
+    })
+
+  }
+
+  useEffect(() => {
+    getAllCoupons();
+  }, [])
  
   return (
-    <div>
+    <div className='w-full'>
+      {isLoading ? (
+        <div className="flex flex-col justify-center self-center h-[80vh] ">
+          <div className="flex justify-center self-center w-[30%] bg-white shadow-lg p-6 rounded-xl">
+            <h2 className="font-bold">Getting Coupon Data</h2>
+            <PulseLoader
+              size={"0.4rem"}
+              color="currentColor"
+              className="ml-3 mt-[3px]"
+            />
+          </div>
+        </div>
+      ) : (
+      <>
       <div className="flex mt-4 items-center w-full justify-between px-5">
         <div className="text-2xl">Coupons</div>
         <div></div>
         <div>
           <button className="text-white p-1 hover:bg-zinc-300 bg-zinc-800 rounded-md bold text-14 w-40">
           <Link to="/addcoupons">
-
               <span className="mr-4">+</span>Add Coupons
             </Link>
           </button>
@@ -147,8 +161,11 @@ const Coupons = () => {
           </button>
         </div>
       </div>
+      </>
+      )  
+    }
     </div>
   );
 }
 
-export default Coupons
+export default Coupons;

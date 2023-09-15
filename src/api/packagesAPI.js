@@ -1,4 +1,4 @@
-import axiosWithTokenHook from "hooks/useAxios";
+import axiosWithTokenHook from "../hooks/useAxios";
 import config from "../config";
 
 const axiosWithToken = axiosWithTokenHook();
@@ -9,9 +9,7 @@ export const packagesAPI = {
   },
 
   addPackage: ({ packageData }) => {
-    return axiosWithToken.post(`${config.baseURL}/packages/`, {
-      packageData,
-    });
+    return axiosWithToken.post(`${config.baseURL}/packages/`, packageData);
   },
 
   getPackageById: ({ packageId }) => {

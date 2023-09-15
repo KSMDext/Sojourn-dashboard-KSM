@@ -1,4 +1,4 @@
-import axiosWithTokenHook from "hooks/useAxios";
+import axiosWithTokenHook from "../hooks/useAxios";
 import config from "../config";
 
 const axiosWithToken = axiosWithTokenHook();
@@ -8,8 +8,8 @@ export const couponsAPI = {
     return axiosWithToken.get(`${config.baseURL}/coupons/`);
   },
 
-  addCoupon: ({ couponData }) => {
-    return axiosWithToken.post(`${config.baseURL}/coupons/`, { couponData });
+  addCoupon: (couponData) => {
+    return axiosWithToken.post(`${config.baseURL}/coupons/`, couponData.couponData);
   },
 
   getCouponById: ({ couponId }) => {

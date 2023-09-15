@@ -27,6 +27,8 @@ import {
   UpdateReservations,
   UpdateSeasonalRule,
   UpdateStaff,
+  Coupons,
+  AddCoupon
 } from "../pages";
 import UpdateLocation from "../pages/Location/UpdateLocation";
 import ErrorPage from "../pages/ErrorPages/ErrorPage";
@@ -143,7 +145,7 @@ const MainRoutes = {
       element: <UpdateSeasonalRule />,
     },
     {
-      path: "extracharge",
+      path: "priceoptions/extracharge",
       element: <ExtraCharge />,
     },
     {
@@ -153,6 +155,14 @@ const MainRoutes = {
     {
       path: "priceoptions/packages",
       element: <Packages />,
+    },
+    {
+      path: "priceoptions/coupons",
+      element: <Coupons />,
+    },
+    {
+      path: "/addcoupons",
+      element: <AddCoupon />,
     },
     {
       path: "createpackage",

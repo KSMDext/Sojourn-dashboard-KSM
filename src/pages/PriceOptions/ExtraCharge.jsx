@@ -9,14 +9,18 @@ import { GlobalFilter } from '../../components/GlobalFilter';
 import axios from 'axios';
 import { useStateContext } from '../../contexts/ContextProvider';
 import { baseUrl } from '../../components/Utilities/apiUtils';
+import { PulseLoader } from 'react-spinners';
+import toast from "react-hot-toast";
+import { setAllCoupons } from '../../store/features/coupons.slice';
+import ExtraChargesController from '../../controllers/extraChargesController';
+import { setAllExtraCharges } from '../../store/features/extracharges.slice';
+import { useDispatch, useSelector } from 'react-redux';
 
 
 const ExtraCharge = () => {
-  const {tokens} = useStateContext();
-  const [MOCK_DATA, setMOCK_DATA] = useState([]);
-  const columns = useMemo(() => COLUMNS, []);
-  const data = useMemo(() => MOCK_DATA, [MOCK_DATA]);
-
+  const [isLoading, setIsLoading] = useState(false);
+  const { allExtraCharges } = useSelector((state) => state.extracharges);
+  const dispatch = useDispatch();
   const {
     getTableProps,
     getTableBodyProps,
@@ -32,8 +36,8 @@ const ExtraCharge = () => {
     setGlobalFilter,
   } = useTable(
     {
-      columns,
-      data,
+      columns: COLUMNS,
+      data: allExtraCharges,
       initialState: { pageSize: 5 }, 
     },
     useGlobalFilter,
@@ -43,25 +47,38 @@ const ExtraCharge = () => {
   const { globalFilter } = state;
   const { pageIndex } = state;
 
-  useEffect(() => {
-    const token = tokens.access
-    const config = {
-        headers: {
-            Authorization: `Bearer ${token}`
-        }
-    };
+  const getAllExtraCharges = async () => {
+    setIsLoading(true);
+    ExtraChargesController.getAllExtraCharges()
+    .then((response) => {
+      dispatch(setAllExtraCharges(response?.data ?? []));
+      setIsLoading(false);
+    })
+    .catch((error) => {
+      console.log(error);
+      setIsLoading(false);
+    })
 
-    axios.get(`${baseUrl}/extra_charges?page=1`, config)
-        .then((response) => {
-            console.log(response.data);
-            setMOCK_DATA(response.data);
-        })
-        .catch((error) => {
-            console.log(error);
-        });
-    }, [tokens]);
+  }
+
+  useEffect(() => {
+    getAllExtraCharges();
+  }, [])
   return (
-    <div>
+    <div className='w-full'>
+      {isLoading ? (
+        <div className="flex flex-col justify-center self-center h-[80vh] ">
+          <div className="flex justify-center self-center w-[30%] bg-white shadow-lg p-6 rounded-xl">
+            <h2 className="font-bold">Getting Coupon Data</h2>
+            <PulseLoader
+              size={"0.4rem"}
+              color="currentColor"
+              className="ml-3 mt-[3px]"
+            />
+          </div>
+        </div>
+      ) : (
+      <>
       <div className="flex mt-4 items-center w-full justify-between px-5">
         <div className="text-2xl">ExtraCharge</div>
         <div></div>
@@ -147,6 +164,9 @@ const ExtraCharge = () => {
           </button>
         </div>
       </div>
+      </>
+      )
+    }
     </div>
   );
 }

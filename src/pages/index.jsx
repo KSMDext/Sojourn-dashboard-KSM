@@ -26,4 +26,6 @@ export {default as GeneralSettings} from './Settings/GeneralSettings';
 export {default as Emails} from './Settings/Emails';
 export {default as Extras} from './Settings/Extras';
 export {default as Policies} from './Settings/Policies';
+export {default as Coupons} from './PriceOptions/Coupons';
+export {default as AddCoupon} from './PriceOptions/AddCoupon';
 
